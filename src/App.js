@@ -1,13 +1,15 @@
 import React from 'react';
+import Break from './components/Break'
+import Focus from './components/Focus'
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>App.js</h1>
-      </header>
-    </div>
+    <section className="App">
+      <h1>App Component</h1>
+      <Break />
+      <Focus />
+    </section>
   );
 }
 
