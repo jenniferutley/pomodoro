@@ -6,7 +6,7 @@ const Focus = ({
     decrementFocusLengthByOneMinute, 
     incrementFocusLengthByOneMinute 
 }) => {
-    const focusLengthInMinutes = moment.duration(focusLength, "s").minutes()
+    const focusLengthInMinutes = moment.duration(focusLength, "s").asMinutes()
     return (
         <section>
             <h2>Focus Component</h2>
