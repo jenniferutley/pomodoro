@@ -11,8 +11,8 @@ const Focus = ({
         <section>
             <h2>Focus</h2>
             <p>{focusLengthInMinutes}</p>
-            <button onClick={decrementFocusLength}>-</button>
-            <button onClick={incrementFocusLength}>+</button>
+            <div className="btn" onClick={decrementFocusLength}>-</div>
+            <div className="btn" onClick={incrementFocusLength}>+</div>
         </section>
     )
 }

@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Break from './components/Break'
 import Focus from './components/Focus'
 import TimeLeft from './components/TimeLeft'
-import endFocus from "./piece-of-cake.mp3"
+import tomato from "./media/tomato.png"
+import endFocus from "./media/piece-of-cake.mp3"
 import './App.css';
 
 function App() {
@@ -96,19 +97,22 @@ function App() {
   //render
   return (
     <main className="App">
-      <h1>App Component</h1>
-      <Break
+      <h2>Pomodoro Timer</h2>
+      {/* <img src={tomato} alt="a tomato"></img> */}
+      <TimeLeft currentSessionType={currentSessionType} handleStartStop={handleStartStop} timeLeft={timeLeft} isStarted={isStarted} />
+      <div className="settings">
+      <Focus
+          focusLength={focusLength}
+          decrementFocusLength={decrementFocusLength}
+          incrementFocusLength={incrementFocusLength} />
+        <div className="btn" onClick={handleResetButtonClick}>Reset</div>
+        <Break
         breakLength={breakLength}
         decrementBreakLength={decrementBreakLength}
         incrementBreakLength={incrementBreakLength}
       />
-      <TimeLeft currentSessionType={currentSessionType} handleStartStop={handleStartStop} timeLeft={timeLeft} isStarted={isStarted} />
-      <Focus
-        focusLength={focusLength}
-        decrementFocusLength={decrementFocusLength}
-        incrementFocusLength={incrementFocusLength} />
-      <button onClick={handleResetButtonClick}>Reset</button>
-      <audio ref={audioElement}><source src={endFocus} type="audio/mpeg" /></audio>
+        <audio ref={audioElement}><source src={endFocus} type="audio/mpeg" /></audio>
+      </div>
     </main>
   )
 }
