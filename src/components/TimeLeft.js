@@ -5,7 +5,7 @@ import momentDurationFormatSetup from "moment-duration-format"
 momentDurationFormatSetup(moment)
 
 const TimeLeft = ({
-    handleStartStop,
+    handleStartPause,
     timeLeft,
     currentSessionType,
     isStarted
@@ -14,8 +14,8 @@ const TimeLeft = ({
     return (
         <section>
             <h1>{formattedTimeLeft}</h1>
-            {/* <p>{currentSessionType}</p> */}
-            <div className="btn" onClick={handleStartStop}>{isStarted ? "Stop" : "Start"}</div>
+            <p>{currentSessionType}</p>
+            <div className="btn" onClick={handleStartPause}>{isStarted ? "Pause" : "Start"}</div>
         </section>
     )
 }

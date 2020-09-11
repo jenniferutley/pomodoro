@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Break from './components/Break'
 import Focus from './components/Focus'
 import TimeLeft from './components/TimeLeft'
-import tomato from "./media/tomato.png"
+// import tomato from "./media/tomato.png"
 import endFocus from "./media/piece-of-cake.mp3"
 import './App.css';
 
@@ -31,42 +31,12 @@ function App() {
         setTimeLeft(focusLength)
       }
     }
-  }, [breakLength, currentSessionType, focusLength, timeLeft])
-
-  //break
-  const decrementBreakLength = () => {
-    const newBreakLength = breakLength - 60
-    if (newBreakLength > 0) {
-      setBreakLength(newBreakLength)
-    }
-  }
-
-  const incrementBreakLength = () => {
-    const newBreakLength = breakLength + 60
-    if (newBreakLength <= 3600) {
-      setBreakLength(newBreakLength)
-    }
-  }
-
-  //focus
-  const decrementFocusLength = () => {
-    const newFocusLength = focusLength - 60
-    if (newFocusLength > 0) {
-      setFocusLength(newFocusLength)
-    }
-
-  }
-  const incrementFocusLength = () => {
-    const newFocusLength = focusLength + 60
-    if (newFocusLength <= 3600) {
-      setFocusLength(newFocusLength)
-    }
-  }
+  }, [breakLength, currentSessionType, focusLength, timeLeft]) 
 
   //time left
   const isStarted = intervalID != null //set to true if an intervalID exists
-  const handleStartStop = () => {
-    if (isStarted) { //the user hit stop
+  const handleStartPause = () => {
+    if (isStarted) { //the user hit Pause
       clearInterval(intervalID)
       setIntervalID(null)
     } else { //the user hit start
@@ -99,17 +69,15 @@ function App() {
     <main className="App">
       <h2>Pomodoro Timer</h2>
       {/* <img src={tomato} alt="a tomato"></img> */}
-      <TimeLeft currentSessionType={currentSessionType} handleStartStop={handleStartStop} timeLeft={timeLeft} isStarted={isStarted} />
+      <TimeLeft currentSessionType={currentSessionType} handleStartPause={handleStartPause} timeLeft={timeLeft} isStarted={isStarted} />
       <div className="settings">
       <Focus
           focusLength={focusLength}
-          decrementFocusLength={decrementFocusLength}
-          incrementFocusLength={incrementFocusLength} />
+          setFocusLength={setFocusLength} />
         <div className="btn" onClick={handleResetButtonClick}>Reset</div>
         <Break
         breakLength={breakLength}
-        decrementBreakLength={decrementBreakLength}
-        incrementBreakLength={incrementBreakLength}
+        setBreakLength={setBreakLength}
       />
         <audio ref={audioElement}><source src={endFocus} type="audio/mpeg" /></audio>
       </div>
