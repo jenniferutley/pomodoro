@@ -3,16 +3,16 @@ import moment from 'moment'
 
 const Break = ({ 
     breakLength, 
-    decrementBreakLengthByOneMinute, 
-    incrementBreakLengthByOneMinute 
+    decrementBreakLength, 
+    incrementBreakLength 
 }) => {
     const breakLengthInMinutes = moment.duration(breakLength, "s").asMinutes()
     return (
         <section>
-            <h2>Break Component</h2>
+            <h2>Break</h2>
             <p>{breakLengthInMinutes}</p>
-            <button onClick={decrementBreakLengthByOneMinute}>-</button>
-            <button onClick={incrementBreakLengthByOneMinute}>+</button>
+            <button onClick={decrementBreakLength}>-</button>
+            <button onClick={incrementBreakLength}>+</button>
         </section>
     )
 }

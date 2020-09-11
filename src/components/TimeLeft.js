@@ -13,7 +13,7 @@ const TimeLeft = ({
     const formattedTimeLeft = moment.duration(timeLeft, "s").format("mm:ss", { trim: false })
     return (
         <section>
-            <h2>Time Left Comoponent</h2>
+            <h2>Time Left</h2>
             <p>{formattedTimeLeft}</p>
             <p>{currentSessionType}</p>
             <button onClick={handleStartStop}>{isStarted ? "Stop" : "Start"}</button>

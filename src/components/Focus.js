@@ -3,16 +3,16 @@ import moment from 'moment'
 
 const Focus = ({
     focusLength, 
-    decrementFocusLengthByOneMinute, 
-    incrementFocusLengthByOneMinute 
+    decrementFocusLength, 
+    incrementFocusLength 
 }) => {
     const focusLengthInMinutes = moment.duration(focusLength, "s").asMinutes()
     return (
         <section>
-            <h2>Focus Component</h2>
+            <h2>Focus</h2>
             <p>{focusLengthInMinutes}</p>
-            <button onClick={decrementFocusLengthByOneMinute}>-</button>
-            <button onClick={incrementFocusLengthByOneMinute}>+</button>
+            <button onClick={decrementFocusLength}>-</button>
+            <button onClick={incrementFocusLength}>+</button>
         </section>
     )
 }
