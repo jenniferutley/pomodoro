@@ -13,9 +13,8 @@ function Focus({ focusLength, setFocusLength}) {
     return (
         <section>
             <h2>Focus</h2>
-            <p>{focusLengthInMinutes}</p>
                 <label htmlFor="focusDuration">duration:</label>
-                <input type="number" id="focusDuration" min="1" max="59" onChange={handleChangeFocus} />            
+                <input type="number" id="focusDuration" min="1" max="59" value={focusLengthInMinutes} onChange={handleChangeFocus} />            
         </section>
     )
 }

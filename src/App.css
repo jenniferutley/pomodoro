@@ -8,6 +8,7 @@ body {
     margin: 0;
     background-image: url(./media/background.jpg);
     background-size: cover;
+    background-attachment: fixed;
 }
 
 html {

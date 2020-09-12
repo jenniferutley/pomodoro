@@ -1,16 +1,11 @@
 import React from 'react'
-import moment from "moment"
-import momentDurationFormatSetup from "moment-duration-format"
 
-momentDurationFormatSetup(moment)
-
-function Timer({ handleStartPause, timeLeft, currentSessionType, setCurrentSessionType, isStarted, focusLength, setFocusLength, setTimeLeft, intervalID, setIntervalID, setBreakLength, breakLength, longBreakLength, setLongBreakLength, focusNumber}) {
+function Timer({ handleStartPause, timeLeft, currentSessionType, setCurrentSessionType, isStarted, focusLength, setFocusLength, setTimeLeft, intervalID, setIntervalID, setBreakLength, breakLength, longBreakLength, setLongBreakLength, focusNumber, setFocusNumber, formattedTimeLeft}) {
 
     const restartButton = <ion-icon name="play-skip-back-sharp"></ion-icon>
     const playButton = <ion-icon name="play-sharp"></ion-icon>
     const pauseButton = <ion-icon name="pause-sharp"></ion-icon>
-    const skipButton = <ion-icon name="play-skip-forward-sharp"></ion-icon>
-    const formattedTimeLeft = moment.duration(timeLeft, "s").format("mm:ss", { trim: false })   
+    const skipButton = <ion-icon name="play-skip-forward-sharp"></ion-icon>  
 
     const handleRestart = () => {
         clearInterval(intervalID)
@@ -32,18 +27,27 @@ function Timer({ handleStartPause, timeLeft, currentSessionType, setCurrentSessi
     const handleSkip = () => {
         clearInterval(intervalID)
         setIntervalID(null)
-        if (currentSessionType === "Focus") {
+        if (currentSessionType === "Focus" && focusNumber < 3) {
             setCurrentSessionType("Break")
+            setFocusNumber(focusNumber + 1)
         }
-        else if (currentSessionType === "Break" || currentSessionType === "Long Break") {
+        if (currentSessionType === "Focus" && focusNumber === 3) {
+            setCurrentSessionType("Long Break")
+            setFocusNumber(focusNumber + 1)
+        }
+        else if (currentSessionType === "Break") {
             setCurrentSessionType("Focus")
+        }
+        else if (currentSessionType === "Long Break") {
+            setCurrentSessionType("Focus")
+            setFocusNumber(0)
         }
     }
 
     return (
         <section>
-            <p>{currentSessionType}</p>
-            <p>{focusNumber}/4 Focus Sessions</p>
+            <h2>{currentSessionType}</h2>
+            <p>{focusNumber}/4 Focus Sessions Completed</p>
             <h1>{formattedTimeLeft}</h1>
             <div className="controls">
                 <div onClick={handleRestart} title="restart current session">{restartButton}</div>
