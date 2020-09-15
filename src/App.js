@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { HelmetProvider }  from "react-helmet-async"
+import { HelmetProvider } from "react-helmet-async"
 import moment from "moment"
 import momentDurationFormatSetup from "moment-duration-format"
 import Break from './components/Break'
@@ -20,12 +20,14 @@ function App() {
   const [longBreakLength, setLongBreakLength] = useState(900)
   const [focusLength, setFocusLength] = useState(1500)
   const [focusNumber, setFocusNumber] = useState(0)
+  const [focusBeforeLong, setFocusBeforeLong] = useState(4)
   const [intervalID, setIntervalID] = useState(null)
   const [currentSessionType, setCurrentSessionType] = useState("Focus")
   const [timeLeft, setTimeLeft] = useState(focusLength)
   const [autoStart, setAutoStart] = useState(true)
-  const isStarted = intervalID != null  
-  const formattedTimeLeft = moment.duration(timeLeft, "s").format("mm:ss", { trim: false }) 
+  const [timerInTitle, setTimerInTitle] = useState(true)
+  const isStarted = intervalID != null
+  const formattedTimeLeft = moment.duration(timeLeft, "s").format("mm:ss", { trim: false })
 
   //listen for changes to session durations
   useEffect(() => {
@@ -45,7 +47,7 @@ function App() {
 
   //listen for sessions to end
   useEffect(() => {
-    if (timeLeft === 0 && currentSessionType === "Focus" && focusNumber < 3) {
+    if (timeLeft === 0 && currentSessionType === "Focus" && focusNumber < (focusBeforeLong - 1)) {
       endFocusAudio.current.volume = 0.1
       endFocusAudio.current.play()
       setCurrentSessionType("Break")
@@ -56,7 +58,7 @@ function App() {
         setIntervalID(null)
       }
     }
-    else if (timeLeft === 0 && currentSessionType === "Focus" && focusNumber === 3) {
+    else if (timeLeft === 0 && currentSessionType === "Focus" && focusNumber === (focusBeforeLong - 1)) {
       endFocusAudio.current.volume = 0.1
       endFocusAudio.current.play()
       setCurrentSessionType("Long Break")
@@ -88,7 +90,7 @@ function App() {
         setIntervalID(null)
       }
     }
-  }, [breakLength, currentSessionType, focusLength, timeLeft, focusNumber, autoStart, intervalID])
+  }, [breakLength, currentSessionType, focusLength, timeLeft, focusNumber, autoStart, intervalID, focusBeforeLong])
 
   //start/pause button handler  
   const handleStartPause = () => {
@@ -103,7 +105,7 @@ function App() {
             return newTimeLeft
           }
         })
-      }, 1000) //todo change to 1000
+      }, 100) //todo change to 1000
       setIntervalID(newIntervalID)
     }
   }
@@ -111,7 +113,7 @@ function App() {
   //render
   return (
     <main className="App">
-      <HelmetProvider><title>Pomodoro Timer | {formattedTimeLeft} </title></HelmetProvider>
+      <HelmetProvider><title>Pomodoro Timer {timerInTitle ? " | " + formattedTimeLeft : ""} </title></HelmetProvider>
       <h2>Pomodoro Timer</h2>
       <Timer
         handleStartPause={handleStartPause}
@@ -130,7 +132,8 @@ function App() {
         longBreakLength={longBreakLength}
         focusNumber={focusNumber}
         setFocusNumber={setFocusNumber}
-        formattedTimeLeft={formattedTimeLeft} />
+        formattedTimeLeft={formattedTimeLeft}
+        focusBeforeLong={focusBeforeLong} />
       <div className="settings">
         <Focus
           focusLength={focusLength}
@@ -144,9 +147,13 @@ function App() {
           setLongBreakLength={setLongBreakLength}
         />
       </div>
-      <Settings 
-      autoStart={autoStart}
-      setAutoStart={setAutoStart}
+      <Settings
+        autoStart={autoStart}
+        setAutoStart={setAutoStart}
+        focusBeforeLong={focusBeforeLong}
+        setFocusBeforeLong={setFocusBeforeLong}
+        timerInTitle={timerInTitle}
+        setTimerInTitle={setTimerInTitle}
       />
       <audio ref={endFocusAudio}><source src={endFocus} type="audio/mpeg" /></audio>
       <audio ref={endBreakAudio}><source src={endBreak} type="audio/mpeg" /></audio>

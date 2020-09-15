@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Timer({ handleStartPause, timeLeft, currentSessionType, setCurrentSessionType, isStarted, focusLength, setFocusLength, setTimeLeft, intervalID, setIntervalID, setBreakLength, breakLength, longBreakLength, setLongBreakLength, focusNumber, setFocusNumber, formattedTimeLeft}) {
+function Timer({ handleStartPause, timeLeft, currentSessionType, setCurrentSessionType, isStarted, focusLength, setFocusLength, setTimeLeft, intervalID, setIntervalID, setBreakLength, breakLength, longBreakLength, setLongBreakLength, focusNumber, setFocusNumber, formattedTimeLeft, focusBeforeLong}) {
 
     const restartButton = <ion-icon name="play-skip-back-sharp"></ion-icon>
     const playButton = <ion-icon name="play-sharp"></ion-icon>
@@ -27,11 +27,11 @@ function Timer({ handleStartPause, timeLeft, currentSessionType, setCurrentSessi
     const handleSkip = () => {
         clearInterval(intervalID)
         setIntervalID(null)
-        if (currentSessionType === "Focus" && focusNumber < 3) {
+        if (currentSessionType === "Focus" && focusNumber < (focusBeforeLong - 1)) {
             setCurrentSessionType("Break")
             setFocusNumber(focusNumber + 1)
         }
-        if (currentSessionType === "Focus" && focusNumber === 3) {
+        if (currentSessionType === "Focus" && focusNumber === (focusBeforeLong - 1)) {
             setCurrentSessionType("Long Break")
             setFocusNumber(focusNumber + 1)
         }
@@ -47,7 +47,7 @@ function Timer({ handleStartPause, timeLeft, currentSessionType, setCurrentSessi
     return (
         <section>
             <h2>{currentSessionType}</h2>
-            <p>{focusNumber}/4 Focus Sessions Completed</p>
+            <p>{focusNumber}/{focusBeforeLong} Focus Sessions Completed</p>
             <h1>{formattedTimeLeft}</h1>
             <div className="controls">
                 <div onClick={handleRestart} title="restart current session">{restartButton}</div>

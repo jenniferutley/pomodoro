@@ -43,7 +43,7 @@ h2 {
     font-family: "Bebas Neue"
 }
 
-
+/* timer controls */
 .controls {
     display: flex;
     justify-content: center;
@@ -69,32 +69,6 @@ ion-icon:active {
     transform: translateY(4px);
  }
 
-.btn {
-    box-shadow: inset 0px 1px 0px 0px #a6827e;
-    background: linear-gradient(to bottom, #7d5d3b 5%, #634b30 100%);
-    background-color: #7d5d3b;
-    border-radius: 3px;
-    border: 1px solid #54381e;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: "Lato";
-    font-size: 20px;
-    padding: 6px 24px;
-    text-decoration: none;
-    text-shadow: 0px 1px 0px #4d3534;
-}
-
-.btn:hover {
-    background: linear-gradient(to bottom, #634b30 5%, #7d5d3b 100%);
-    background-color: #634b30;
-}
-
-.btn:active {
-    position: relative;
-    top: 1px;
-}
-
 .settings {
     display: flex;
     justify-content: space-between;
@@ -109,5 +83,60 @@ input[type=number] {
     color: #fff;
     background-color: rgba(0, 0, 0, 0.1);
 }
+
+/* toggle button */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 34px;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    border-radius: 50%;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: greenyellow;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px greenyellow;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
 
 
