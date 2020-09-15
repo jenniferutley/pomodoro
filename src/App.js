@@ -2,14 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { HelmetProvider } from "react-helmet-async"
 import moment from "moment"
 import momentDurationFormatSetup from "moment-duration-format"
-import Break from './components/Break'
-import LongBreak from './components/LongBreak'
-import Focus from './components/Focus'
 import Timer from './components/Timer'
 import Settings from "./components/Settings"
+import About from "./components/About"
 import endFocus from "./media/piece-of-cake.mp3"
 import endBreak from "./media/goes-without-saying.mp3"
-import './App.css'
 
 momentDurationFormatSetup(moment)
 
@@ -26,8 +23,12 @@ function App() {
   const [timeLeft, setTimeLeft] = useState(focusLength)
   const [autoStart, setAutoStart] = useState(true)
   const [timerInTitle, setTimerInTitle] = useState(true)
+  const [showModal, setShowModal] = useState(false)
+  const [showAbout, setShowAbout] = useState(false)
   const isStarted = intervalID != null
   const formattedTimeLeft = moment.duration(timeLeft, "s").format("mm:ss", { trim: false })
+  const settingsButton = <ion-icon name="settings-sharp"></ion-icon>
+  const aboutButton = <ion-icon name="help-circle-sharp"></ion-icon>
 
   //listen for changes to session durations
   useEffect(() => {
@@ -110,6 +111,16 @@ function App() {
     }
   }
 
+  //modals
+  const handleSettings = () => {
+    setShowModal(!showModal)
+  }
+
+  const handleAbout = () => {
+    setShowAbout(!showAbout)
+  }
+
+
   //render
   return (
     <main className="App">
@@ -134,26 +145,27 @@ function App() {
         setFocusNumber={setFocusNumber}
         formattedTimeLeft={formattedTimeLeft}
         focusBeforeLong={focusBeforeLong} />
-      <div className="settings">
-        <Focus
-          focusLength={focusLength}
-          setFocusLength={setFocusLength} />
-        <Break
-          breakLength={breakLength}
-          setBreakLength={setBreakLength}
-        />
-        <LongBreak
-          longBreakLength={longBreakLength}
-          setLongBreakLength={setLongBreakLength}
-        />
-      </div>
+      <div onClick={handleAbout}>{aboutButton}</div>
+      <div onClick={handleSettings}>{settingsButton}</div>
+      <About
+        showAbout={showAbout}
+        setShowAbout={setShowAbout}
+      />
       <Settings
+        focusLength={focusLength}
+        setFocusLength={setFocusLength}
+        breakLength={breakLength}
+        setBreakLength={setBreakLength}
+        longBreakLength={longBreakLength}
+        setLongBreakLength={setLongBreakLength}
         autoStart={autoStart}
         setAutoStart={setAutoStart}
         focusBeforeLong={focusBeforeLong}
         setFocusBeforeLong={setFocusBeforeLong}
         timerInTitle={timerInTitle}
         setTimerInTitle={setTimerInTitle}
+        showModal={showModal}
+        setShowModal={setShowModal}
       />
       <audio ref={endFocusAudio}><source src={endFocus} type="audio/mpeg" /></audio>
       <audio ref={endBreakAudio}><source src={endBreak} type="audio/mpeg" /></audio>

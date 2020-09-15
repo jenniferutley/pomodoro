@@ -1,40 +1,52 @@
 import React from 'react'
+import Break from './Break'
+import LongBreak from './LongBreak'
+import Focus from './Focus'
+import AdditionalSettings from "./AdditionalSettings"
 
-function Settings({ autoStart, setAutoStart, focusBeforeLong, setFocusBeforeLong, timerInTitle, setTimerInTitle }) {
+function Settings({ focusLength, setFocusLength, breakLength, setBreakLength, longBreakLength, setLongBreakLength, autoStart, setAutoStart, focusBeforeLong, setFocusBeforeLong, timerInTitle, setTimerInTitle, showModal, setShowModal }) {
 
-    const handleAutoStart = () => {
-        setAutoStart(!autoStart)
+    const closeButton = <ion-icon name="close-sharp"></ion-icon>
+
+    const handleClose = () => {
+        setShowModal(!showModal)
     }
 
-    const handleFocusBeforeLong = (e) => {
-        setFocusBeforeLong(e.target.value)
+    if (!showModal) {
+        return null
     }
-
-    const handleTimerInTitle = () => {
-        setTimerInTitle(!timerInTitle)
+    else {
+        return (
+            <section>
+                <div className="modal">
+                <div onClick={handleClose}>{closeButton}</div>
+                <h2>Settings</h2>
+                <div className="settings">
+                    <Focus
+                        focusLength={focusLength}
+                        setFocusLength={setFocusLength} />
+                    <Break
+                        breakLength={breakLength}
+                        setBreakLength={setBreakLength}
+                    />
+                    <LongBreak
+                        longBreakLength={longBreakLength}
+                        setLongBreakLength={setLongBreakLength}
+                    />
+                </div>
+                <AdditionalSettings
+                    autoStart={autoStart}
+                    setAutoStart={setAutoStart}
+                    focusBeforeLong={focusBeforeLong}
+                    setFocusBeforeLong={setFocusBeforeLong}
+                    timerInTitle={timerInTitle}
+                    setTimerInTitle={setTimerInTitle}
+                />
+                </div>
+                <div className="modal-overlay"></div>
+            </section>
+        )
     }
-
-    return (
-        <section>
-            <h2>Other Settings</h2>
-            <div class="settings"><p></p>
-            <label htmlFor="focusBeforeLong">number of focus sessions before long break</label>
-                <input type="number" id="focusBeforeLong" min="1" max="100" value={focusBeforeLong} onChange={handleFocusBeforeLong} /> 
-            </div>
-            <div class="settings"><p>automatically start new session</p>
-                <label htmlFor="autoStart" class="switch">
-                    <input type="checkbox" id="autoStart" defaultChecked={autoStart} onChange={handleAutoStart} />
-                    <span class="slider"></span>
-                </label>
-            </div>
-            <div class="settings"><p>show timer in title</p>
-                <label htmlFor="timerInTitle"class="switch">
-                    <input type="checkbox" id="timerInTitle" defaultChecked={timerInTitle} onChange={handleTimerInTitle} />
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </section>
-    )
 }
 
 export default Settings

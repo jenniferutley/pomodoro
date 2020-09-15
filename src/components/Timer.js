@@ -5,7 +5,7 @@ function Timer({ handleStartPause, timeLeft, currentSessionType, setCurrentSessi
     const restartButton = <ion-icon name="play-skip-back-sharp"></ion-icon>
     const playButton = <ion-icon name="play-sharp"></ion-icon>
     const pauseButton = <ion-icon name="pause-sharp"></ion-icon>
-    const skipButton = <ion-icon name="play-skip-forward-sharp"></ion-icon>  
+    const skipButton = <ion-icon name="play-skip-forward-sharp"></ion-icon>
 
     const handleRestart = () => {
         clearInterval(intervalID)

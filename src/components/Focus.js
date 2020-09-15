@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-function Focus({ focusLength, setFocusLength}) {
+function Focus({ focusLength, setFocusLength }) {
 
     const focusLengthInMinutes = moment.duration(focusLength, "s").asMinutes()
 
@@ -12,9 +12,8 @@ function Focus({ focusLength, setFocusLength}) {
 
     return (
         <section>
-            <h2>Focus</h2>
-                <label htmlFor="focusDuration">duration:</label>
-                <input type="number" id="focusDuration" min="1" max="59" value={focusLengthInMinutes} onChange={handleChangeFocus} />            
+            <label htmlFor="focusDuration">focus duration:</label>
+            <input type="number" id="focusDuration" min="1" max="59" value={focusLengthInMinutes} onChange={handleChangeFocus} />
         </section>
     )
 }
