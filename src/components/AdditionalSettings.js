@@ -15,21 +15,21 @@ function AdditionalSettings({ autoStart, setAutoStart, focusBeforeLong, setFocus
     }
 
     return (
-        <section>
-            <div class="settings"><p></p>
-            <label htmlFor="focusBeforeLong">number of focus sessions before long break</label>
-                <input type="number" id="focusBeforeLong" min="1" max="100" value={focusBeforeLong} onChange={handleFocusBeforeLong} /> 
+        <section >
+            <div>
+                <label htmlFor="focusBeforeLong">focus sessions before long break</label>
+                <input type="number" id="focusBeforeLong" min="1" max="100" value={focusBeforeLong} onChange={handleFocusBeforeLong} />
             </div>
-            <div class="settings"><p>automatically start next session</p>
-                <label htmlFor="autoStart" class="switch">
+            <div><p>automatically start next session</p>
+                <label htmlFor="autoStart" className="switch">
                     <input type="checkbox" id="autoStart" defaultChecked={autoStart} onChange={handleAutoStart} />
-                    <span class="slider"></span>
+                    <span className="slider"></span>
                 </label>
             </div>
-            <div class="settings"><p>show timer in title</p>
-                <label htmlFor="timerInTitle"class="switch">
+            <div><p>show timer in title</p>
+                <label htmlFor="timerInTitle" className="switch">
                     <input type="checkbox" id="timerInTitle" defaultChecked={timerInTitle} onChange={handleTimerInTitle} />
-                    <span class="slider"></span>
+                    <span className="slider"></span>
                 </label>
             </div>
         </section>

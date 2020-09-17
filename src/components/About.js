@@ -5,17 +5,22 @@ function About({ showAbout, setShowAbout }) {
     const closeButton = <ion-icon name="close-sharp"></ion-icon>
 
     const handleClose = () => {
-        setShowAbout(!showAbout)
+        document.getElementById("about-modal").classList.add("slide-out-bottom")
+        setTimeout(() => {
+            setShowAbout(!showAbout)
+        }, 500)
     }
+
 
     if (!showAbout) {
         return null
     }
     else {
+        document.body.style.overflow = "hidden"
         return (
-            <section className="modal">
+            <section id="about-modal" className="modal slide-in-bottom">
                 <div onClick={handleClose}>{closeButton}</div>
-                <h2>Why am I so cool?</h2>
+                <p>Why am I so cool?</p>
             </section>
         )
     }

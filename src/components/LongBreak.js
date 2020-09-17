@@ -12,7 +12,7 @@ function LongBreak({ longBreakLength, setLongBreakLength }) {
 
     return (
         <section>
-            <label htmlFor="longBreakDuration">long break duration:</label>
+            <label htmlFor="longBreakDuration">long break duration</label>
             <input type="number" id="longBreakDuration" min="1" value={longBreakLengthInMinutes} onChange={handleChangeLongBreak} />
         </section>
     )

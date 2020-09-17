@@ -23,12 +23,13 @@ function App() {
   const [timeLeft, setTimeLeft] = useState(focusLength)
   const [autoStart, setAutoStart] = useState(true)
   const [timerInTitle, setTimerInTitle] = useState(true)
-  const [showModal, setShowModal] = useState(false)
+  const [showSettings, setShowSettings] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
   const isStarted = intervalID != null
   const formattedTimeLeft = moment.duration(timeLeft, "s").format("mm:ss", { trim: false })
-  const settingsButton = <ion-icon name="settings-sharp"></ion-icon>
   const aboutButton = <ion-icon name="help-circle-sharp"></ion-icon>
+  const settingsButton = <ion-icon name="settings-sharp"></ion-icon>
+
 
   //listen for changes to session durations
   useEffect(() => {
@@ -113,11 +114,33 @@ function App() {
 
   //modals
   const handleSettings = () => {
-    setShowModal(!showModal)
+    setShowAbout(false)
+    //first time clicked, element doesn't exist
+    if (!document.getElementById("settings-modal")) {
+      setShowSettings(!showSettings)
+    }
+    else {
+      //not the first time, element exists
+      document.getElementById("settings-modal").classList.add("slide-out-bottom")
+      setTimeout(() => {
+        setShowSettings(!showSettings)
+      }, 500)
+    }
   }
 
   const handleAbout = () => {
-    setShowAbout(!showAbout)
+    setShowSettings(false)
+    //first time clicked, element doesn't exist
+    if (!document.getElementById("about-modal")) {
+      setShowAbout(!showAbout)
+    }
+    else {
+      //not the first time, element exists
+      document.getElementById("about-modal").classList.add("slide-out-bottom")
+      setTimeout(() => {
+        setShowSettings(!showAbout)
+      }, 500)
+    }
   }
 
 
@@ -125,7 +148,10 @@ function App() {
   return (
     <main className="App">
       <HelmetProvider><title>Pomodoro Timer {timerInTitle ? " | " + formattedTimeLeft : ""} </title></HelmetProvider>
-      <h2>Pomodoro Timer</h2>
+      <div className="app-title"><p>Pomodoro Timer</p>
+        <div className="about-settings"> <div onClick={handleAbout}>{aboutButton}</div>
+          <div className="about-settings" onClick={handleSettings}>{settingsButton}</div></div>
+      </div>
       <Timer
         handleStartPause={handleStartPause}
         timeLeft={timeLeft}
@@ -145,8 +171,7 @@ function App() {
         setFocusNumber={setFocusNumber}
         formattedTimeLeft={formattedTimeLeft}
         focusBeforeLong={focusBeforeLong} />
-      <div onClick={handleAbout}>{aboutButton}</div>
-      <div onClick={handleSettings}>{settingsButton}</div>
+
       <About
         showAbout={showAbout}
         setShowAbout={setShowAbout}
@@ -164,8 +189,8 @@ function App() {
         setFocusBeforeLong={setFocusBeforeLong}
         timerInTitle={timerInTitle}
         setTimerInTitle={setTimerInTitle}
-        showModal={showModal}
-        setShowModal={setShowModal}
+        showSettings={showSettings}
+        setShowSettings={setShowSettings}
       />
       <audio ref={endFocusAudio}><source src={endFocus} type="audio/mpeg" /></audio>
       <audio ref={endBreakAudio}><source src={endBreak} type="audio/mpeg" /></audio>

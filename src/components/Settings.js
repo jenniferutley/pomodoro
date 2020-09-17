@@ -4,24 +4,33 @@ import LongBreak from './LongBreak'
 import Focus from './Focus'
 import AdditionalSettings from "./AdditionalSettings"
 
-function Settings({ focusLength, setFocusLength, breakLength, setBreakLength, longBreakLength, setLongBreakLength, autoStart, setAutoStart, focusBeforeLong, setFocusBeforeLong, timerInTitle, setTimerInTitle, showModal, setShowModal }) {
+function Settings({ focusLength, setFocusLength, breakLength, setBreakLength, longBreakLength, setLongBreakLength, autoStart, setAutoStart, focusBeforeLong, setFocusBeforeLong, timerInTitle, setTimerInTitle, showSettings, setShowSettings }) {
 
     const closeButton = <ion-icon name="close-sharp"></ion-icon>
 
     const handleClose = () => {
-        setShowModal(!showModal)
+        document.getElementById("settings-modal").classList.add("slide-out-bottom")
+        setTimeout(() => {
+            setShowSettings(!showSettings)
+        }, 500)
     }
 
-    if (!showModal) {
+    if (!showSettings) {
         return null
     }
+
     else {
+        document.body.style.overflow = "hidden"
         return (
-            <section>
-                <div className="modal">
-                <div onClick={handleClose}>{closeButton}</div>
-                <h2>Settings</h2>
-                <div className="settings">
+            <section id="settings-modal" className="modal slide-in-bottom">
+
+
+                <div className="settings-title"><p>Settings</p> <div className="settings-close" onClick={handleClose}>{closeButton}</div>
+
+
+                </div>
+
+                <div className="settings-1">
                     <Focus
                         focusLength={focusLength}
                         setFocusLength={setFocusLength} />
@@ -29,21 +38,24 @@ function Settings({ focusLength, setFocusLength, breakLength, setBreakLength, lo
                         breakLength={breakLength}
                         setBreakLength={setBreakLength}
                     />
+                </div>
+
+                <div className="settings-2">
                     <LongBreak
                         longBreakLength={longBreakLength}
                         setLongBreakLength={setLongBreakLength}
                     />
+
+
+                    <AdditionalSettings
+                        autoStart={autoStart}
+                        setAutoStart={setAutoStart}
+                        focusBeforeLong={focusBeforeLong}
+                        setFocusBeforeLong={setFocusBeforeLong}
+                        timerInTitle={timerInTitle}
+                        setTimerInTitle={setTimerInTitle}
+                    />
                 </div>
-                <AdditionalSettings
-                    autoStart={autoStart}
-                    setAutoStart={setAutoStart}
-                    focusBeforeLong={focusBeforeLong}
-                    setFocusBeforeLong={setFocusBeforeLong}
-                    timerInTitle={timerInTitle}
-                    setTimerInTitle={setTimerInTitle}
-                />
-                </div>
-                <div className="modal-overlay"></div>
             </section>
         )
     }

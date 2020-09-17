@@ -12,7 +12,7 @@ function Break({ breakLength, setBreakLength }) {
 
     return (
         <section>
-            <label htmlFor="breakDuration">break duration:</label>
+            <label htmlFor="breakDuration">break duration</label>
             <input type="number" id="breakDuration" min="1" max="59" value={breakLengthInMinutes} onChange={handleChangeBreak} />
         </section>
     )
