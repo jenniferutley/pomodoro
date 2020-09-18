@@ -121,6 +121,7 @@ function App() {
     }
     else {
       //not the first time, element exists
+      document.getElementById("settings-modal").classList.remove("slide-in-bottom")
       document.getElementById("settings-modal").classList.add("slide-out-bottom")
       setTimeout(() => {
         setShowSettings(!showSettings)
@@ -136,9 +137,10 @@ function App() {
     }
     else {
       //not the first time, element exists
+      document.getElementById("about-modal").classList.remove("slide-in-bottom")
       document.getElementById("about-modal").classList.add("slide-out-bottom")
       setTimeout(() => {
-        setShowSettings(!showAbout)
+        setShowAbout(!showAbout)
       }, 500)
     }
   }
@@ -149,8 +151,8 @@ function App() {
     <main className="App">
       <HelmetProvider><title>Pomodoro Timer {timerInTitle ? " | " + formattedTimeLeft : ""} </title></HelmetProvider>
       <div className="app-title"><p>Pomodoro Timer</p>
-        <div className="about-settings"> <div onClick={handleAbout}>{aboutButton}</div>
-          <div className="about-settings" onClick={handleSettings}>{settingsButton}</div></div>
+        <div className="app-buttons"> <div onClick={handleAbout}>{aboutButton}</div>
+          <div className="app-buttons" onClick={handleSettings}>{settingsButton}</div></div>
       </div>
       <Timer
         handleStartPause={handleStartPause}
