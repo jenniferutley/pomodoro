@@ -57,20 +57,24 @@ function Settings({ focusLength, setFocusLength, breakLength, setBreakLength, lo
           <input type="number" id="focusBeforeLong" min="1" max="100" value={focusBeforeLong} onChange={handleFocusBeforeLong} />
         </div>
 
-        <div className="autostart-grid">          
-          <span>automatically start next session</span>          
-          <label htmlFor="autoStart" className="switch">
-            <input type="checkbox" id="autoStart" defaultChecked={autoStart} onChange={handleAutoStart} />
-            <span className="slider"></span>
-          </label>
+        <div className="autostart-grid">
+          <span>automatically start next session</span>
+          <div className="switch">
+            <label htmlFor="autoStart">
+              <input type="checkbox" id="autoStart" defaultChecked={autoStart} onChange={handleAutoStart} />
+              <span class="lever"></span>
+            </label>
+          </div>
         </div>
 
         <div className="timer-title-grid">
           <span>show timer in title</span>
-          <label htmlFor="timerInTitle" className="switch">
-            <input type="checkbox" id="timerInTitle" defaultChecked={timerInTitle} onChange={handleTimerInTitle} />
-            <span className="slider"></span>
-          </label>
+          <div className="switch">
+            <label htmlFor="timerInTitle">
+              <input type="checkbox" id="timerInTitle" defaultChecked={timerInTitle} onChange={handleTimerInTitle} />
+              <span class="lever"></span>
+            </label>
+          </div>
         </div>
       </section>
     )

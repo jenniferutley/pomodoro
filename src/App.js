@@ -107,7 +107,7 @@ function App() {
             return newTimeLeft
           }
         })
-      }, 100) //todo change to 1000
+      }, 1000)
       setIntervalID(newIntervalID)
     }
   }
