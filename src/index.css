@@ -141,6 +141,20 @@ ion-icon:active {
   line-height: 250%;
 }
 
+@media (max-device-height: 873px) {
+    .modal {
+      background-color: rgba(0, 0, 0, 0.95);
+    }
+
+}
+
+@media (max-device-width: 1526px) {
+  .modal {
+    background-color: rgba(0, 0, 0, 0.95);
+  }
+
+}
+
 #settings-modal {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

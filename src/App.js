@@ -50,7 +50,7 @@ function App() {
   //listen for sessions to end
   useEffect(() => {
     if (timeLeft === 0 && currentSessionType === "Focus" && focusNumber < (focusBeforeLong - 1)) {
-      endFocusAudio.current.volume = 0.1
+      endFocusAudio.current.volume = 0.2
       endFocusAudio.current.play()
       setCurrentSessionType("Break")
       setTimeLeft(breakLength)
@@ -61,7 +61,7 @@ function App() {
       }
     }
     else if (timeLeft === 0 && currentSessionType === "Focus" && focusNumber === (focusBeforeLong - 1)) {
-      endFocusAudio.current.volume = 0.1
+      endFocusAudio.current.volume = 0.2
       endFocusAudio.current.play()
       setCurrentSessionType("Long Break")
       setTimeLeft(breakLength)
@@ -72,7 +72,7 @@ function App() {
       }
     }
     else if (timeLeft === 0 && currentSessionType === "Break") {
-      endBreakAudio.current.volume = 0.1
+      endBreakAudio.current.volume = 0.2
       endBreakAudio.current.play()
       setCurrentSessionType("Focus")
       setTimeLeft(focusLength)
@@ -82,7 +82,7 @@ function App() {
       }
     }
     else if (timeLeft === 0 && currentSessionType === "Long Break") {
-      endBreakAudio.current.volume = 0.1
+      endBreakAudio.current.volume = 0.2
       endBreakAudio.current.play()
       setCurrentSessionType("Focus")
       setFocusNumber(0)
