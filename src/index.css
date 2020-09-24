@@ -66,16 +66,14 @@ ion-icon[name="help-circle-sharp"], ion-icon[name="settings-sharp"], ion-icon[na
   TIMER
 -----------------------*/
 
-.time-left, 
-.session-type, 
-.focus-number {
+.time-left, .session-type, .focus-number {
   text-align: center;
   margin-bottom: 12px;
 }
 
 .time-left {
   font-family: "Bebas Neue", monospace;
-  font-size: 600%;  
+  font-size: 600%;
 }
 
 .session-type {
@@ -141,18 +139,19 @@ ion-icon:active {
   line-height: 250%;
 }
 
-@media (max-device-height: 873px) {
-    .modal {
-      background-color: rgba(0, 0, 0, 0.95);
-    }
-
-}
-
-@media (max-device-width: 1526px) {
+@media (max-height: 873px) {
   .modal {
     background-color: rgba(0, 0, 0, 0.95);
   }
+}
 
+@media only screen and (max-width: 1526px) {
+  #settings-modal {
+    padding: 0 1% !important;
+  }
+  #about-modal {
+    padding: 0 5% !important;
+  }
 }
 
 #settings-modal {
@@ -188,7 +187,7 @@ ion-icon:active {
 }
 
 .timer-title-grid {
-  grid-column-start: 2;  
+  grid-column-start: 2;
   display: flex;
   align-items: center;
 }
@@ -214,13 +213,12 @@ input[type=number] {
   SETTINGS TOGGLE BUTTONS
 -----------------------*/
 
-.switch,
-.switch * {
+.switch, .switch * {
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .switch label {
@@ -233,16 +231,16 @@ input[type=number] {
   height: 0;
 }
 
-.switch label input[type=checkbox]:checked + .lever {
+.switch label input[type=checkbox]:checked+.lever {
   background-color: #b9e01c;
 }
 
-.switch label input[type=checkbox]:checked + .lever:before, .switch label input[type=checkbox]:checked + .lever:after {
+.switch label input[type=checkbox]:checked+.lever:before, .switch label input[type=checkbox]:checked+.lever:after {
   left: 18px;
 }
 
-.switch label input[type=checkbox]:checked + .lever:after {
-  background-color:#8daa14;
+.switch label input[type=checkbox]:checked+.lever:after {
+  background-color: #8daa14;
 }
 
 .switch label .lever {
@@ -282,7 +280,7 @@ input[type=number] {
 .switch label .lever:after {
   background-color: #F1F1F1;
   -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-          box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
 /* -----------------------
